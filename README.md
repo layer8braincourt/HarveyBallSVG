@@ -61,8 +61,8 @@ included:
 ## Add the Harvey Ball Macro to Atlassian Confluence
 
 With Confluence Admin rights ...
-* add the contents of the HarveyBalls.css file to the global stylesheet in the admin UI
-* add a new user macro and insert the content of the HarveyBalls.vtl file in the code section
+* add the contents of the [HarveyBalls.css](HarveyBalls.css) file to the global stylesheet in the admin UI
+* add a new user macro and insert the content of the [HarveyBalls.vtl](HarveyBalls.vtl) file in the code section
   * visible to all users in the macro browser
   * category: Confluence content
   * no macro body
