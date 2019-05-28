@@ -1,0 +1,109 @@
+## Macro title: harvey-ball-svg
+## Macro has a body: N
+## Body processing: Selected body processing option
+## Output: Selected output option
+##
+## Developed by: Arnd Layer
+## Date created: 2019-05-27
+## Confluence version: 6.14
+## Installed by: Arnd Layer
+
+## inserts a Harvey Ball in SVG format
+
+## @param ColBack:title=Background Color|type=enum|enumValues=black,grey,white,red,green,blue,yellow,cyan,magenta|desc=fill color of the harvey ball|required=true|multiple=false|default=white
+## @param ColFore:title=Foreground Color|type=enum|enumValues=black,grey,white,red,green,blue,yellow,cyan,magenta|desc=fill color of the harvey ball|required=true|multiple=false|default=black
+## @param FillValue:title=Fill Value|type=enum|enumValues=0,1,2,3,4|desc=number of quarters to be filled|required=true|multiple=fals|default=0
+## @param FillDir:title=Fill Direction|type=enum|enumValues=clockwise,counterclockwise|desc=|required=true|multiple=fals|default=clockwise
+## @param Size:title=Size|type=enum|enumValues=line height,1.5 lines,2 lines,10px,20px,25px,50px,75px,100px,200px|desc=MY DESCRIPTION|required=true|multiple=fals|default=line height
+
+#if( $paramColBack == "" )
+  #set( $backCol = "white" )
+#else
+  #set( $backCol = $paramColBack )
+#end
+
+#if( $paramColFore == "" )
+  #set( $foreCol = "black" )
+#else
+  #set( $foreCol = $paramColFore )
+#end
+
+#if( $paramSize == "" )
+  #set( $size = "size1em" )
+#elseif( $paramSize == "line height" )
+  #set( $size = "size1em" )
+#elseif( $paramSize == "1.5 lines" )
+  #set( $size = "size3halvesem" )
+#elseif( $paramSize == "2 lines" )
+  #set( $size = "size2em" )
+#else
+  #set( $size = "size$paramSize" )
+#end
+
+#if( $paramFillDir == "" )
+  #set( $fillDir = "clockwise" )
+#else
+  #set( $fillDir = $paramFillDir  )
+#end
+
+#if( $paramFillValue == "0" )
+<svg class="$size"><g>
+  <use href="#harvey-circle" class="harvey $backCol" />
+</g></svg>
+#elseif( $paramFillValue == "1" )
+<svg class="$size"><g>
+  <use href="#harvey-circle" class="harvey $backCol" />
+  <use href="#${fillDir}-1of4" class="harvey-fill $foreCol" />
+</g></svg>
+#elseif( $paramFillValue == "2" )
+<svg class="$size"><g>
+  <use href="#harvey-circle" class="harvey $backCol" />
+  <use href="#${fillDir}-2of4" class="harvey-fill $foreCol" />
+</g></svg>
+#elseif( $paramFillValue == "3" )
+<svg class="$size"><g>
+  <use href="#harvey-circle" class="harvey $backCol" />
+  <use href="#${fillDir}-3of4" class="harvey-fill $foreCol" />
+</g></svg>
+#elseif( $paramFillValue == "4" )
+<svg class="$size"><g>
+  <use href="#harvey-circle" class="harvey-fill $foreCol" />
+</g></svg>
+#else
+<svg class="$size"><g>
+  <use href="#harvey-circle" class="harvey $backCol" />
+</g></svg>
+#end
+
+<!--  <svg width="100" height="100" display="none"> -->
+<svg display="none"><defs>
+  <title>Komponenten für den Harvey Ball</title>
+  <symbol id="harvey-circle" viewBox="0 0 100 100">
+    <desc>Kreis für den Hintergrund</desc>
+    <circle cx="50" cy="50" r="40" />
+  </symbol>
+  <symbol id="clockwise-1of4" viewBox="0 0 100 100">
+    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <path d="M 50 50 L 50 10 A 40 40 0 0 1 90 50 L 50 50" />
+  </symbol>
+  <symbol id="clockwise-2of4" viewBox="0 0 100 100">
+    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <path d="M 50 50 L 50 10 A 40 40 0 0 1 50 90 L 50 50" />
+  </symbol>
+  <symbol id="clockwise-3of4" viewBox="0 0 100 100">
+    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <path d="M 50 50 L 50 10 A 40 40 0 1 1 10 50 L 50 50" />
+  </symbol>
+  <symbol id="counterclockwise-1of4" viewBox="0 0 100 100">
+    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <path d="M 50 50 L 50 10 A 40 40 0 0 0 10 50 L 50 50" />
+  </symbol>
+  <symbol id="counterclockwise-2of4" viewBox="0 0 100 100">
+    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <path d="M 50 50 L 50 10 A 40 40 0 0 0 50 90 L 50 50" />
+  </symbol>
+  <symbol id="counterclockwise-3of4" viewBox="0 0 100 100">
+    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <path d="M 50 50 L 50 10 A 40 40 0 1 0 90 50 L 50 50" />
+  </symbol>
+</defs></svg>
