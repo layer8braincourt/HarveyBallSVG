@@ -1,13 +1,17 @@
 # HarveyBallSVG
+
 CSS for SVG based Harvey Balls and user macro for Atlassian Confluence
+
 > Harvey balls are round ideograms used for visual communication of qualitative information. They are commonly used in comparison tables to indicate the degree to which a particular item meets a particular criterion. ([Wikipedia](https://en.wikipedia.org/wiki/Harvey_balls))
 
 included:
+
 - stylesheet for formatting the icon
 - example HTML for using SVG to create a Harvey Ball icon and format it using classes
 - VTL (Apache Velocity Templating Language) file that can be installed in Atlassian Confluence as a user macro
 
 ## Using Harvey Balls in HTML
+
 1. link to the CSS file in your HTML's header
 2. add the SVG defs to the end of your file
 ```html
@@ -54,3 +58,11 @@ included:
      - `<svg class="harvey-ball size2em"><g><use href="#harvey-circle" class="harvey grey" /><use href="#clockwise-1of4" class="harvey-fill green" /></g></svg>` 
      ... for a ball with grey background and double line height filled green for one quadrant
      
+## Add the Harvey Ball Macro to Atlassian Confluence
+
+With Confluence Admin rights ...
+* add the contents of the HarveyBalls.css file to the global stylesheet in the admin UI
+* add a new user macro and insert the content of the HarveyBalls.vtl file in the code section
+  * visible to all users in the macro browser
+  * category: Confluence content
+  * no macro body
