@@ -1,0 +1,40 @@
+/* additional color classes for to compensate for MS IE lack of CSS variable support - add these styles before the styles in harvey-svg.css so that the can be overwritten by the other classes using CSS variable in those browsers that support variables */
+
+.harvey {
+  stroke: black;
+  stroke-width: 2;
+  fill: white;
+}
+.harvey-fill {
+  stroke: black;
+  stroke-width: 2;
+  fill: black;
+}
+
+.black {
+  fill: black;
+}
+.grey {
+  fill: grey;
+}
+.white {
+  fill: white;
+}
+.red {
+  fill: red;
+}
+.green {
+  fill: green;
+}
+.blue {
+  fill: blue;
+}
+.yellow {
+  fill: yellow;
+}
+.cyan {
+  fill: cyan;
+}
+.magenta {
+  fill: magenta;
+}

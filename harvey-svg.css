@@ -1,3 +1,9 @@
+/*
+Stylesheet for styling SVG based Harvey Balls
+*/
+
+/* define colors using CSS variables - using standard CSS colors */
+
 :root {
   --color-black: black;
   --color-grey: grey;
@@ -8,22 +14,26 @@
   --color-yellow: yellow;
   --color-cyan: cyan;
   --color-magenta: magenta;
-  --harvey-color-stroke: var(--color-black);
-  --harvey-color-background: var(--color-white);
-  --harvey-color-fill: var(--color-black);
+  --harvey-color-stroke: var(--color-black); /* default stroke color */
+  --harvey-color-background: var(--color-white); /* default background color */
+  --harvey-color-fill: var(--color-black); /* default fill color */
+  --harvey-stroke: 2; /* defining the stroke width */
 }
+
+/* classes for Harvey Ball background (.harvey) and fill (.harvey-fill) with default colors */
 
 .harvey {
   stroke: var(--harvey-color-stroke);
-  stroke-width: 2;
+  stroke-width: var(--harvey-stroke);
   fill: var(--harvey-color-background);
 }
-
 .harvey-fill {
   stroke: var(--harvey-color-stroke);
-  stroke-width: 2;
+  stroke-width: var(--harvey-stroke);
   fill: var(--harvey-color-fill);
 }
+
+/* color classes for Harvey Ball back- and foreground - colors are defined in the :root element */
 
 .black {
   fill: var(--color-black);
@@ -53,6 +63,8 @@
   fill: var(--color-magenta);
 }
 
+/* size classes for Harvey Balls - scaling the SVG image generated either absolutely to px-sizes or relative to the line height */
+
 .size10px {
   width: 10px;
   height: 10px;
@@ -70,7 +82,7 @@
   height: 75px;
 }
 .size100px {
-  width: 100x;
+  width: 100px;
   height: 100px;
 }
 .size200px {

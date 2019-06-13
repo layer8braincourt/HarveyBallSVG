@@ -14,19 +14,36 @@
 ## @param ColFore:title=Foreground Color|type=enum|enumValues=black,grey,white,red,green,blue,yellow,cyan,magenta|desc=fill color of the harvey ball|required=true|multiple=false|default=black
 ## @param FillValue:title=Fill Value|type=enum|enumValues=0,1,2,3,4|desc=number of quarters to be filled|required=true|multiple=fals|default=0
 ## @param FillDir:title=Fill Direction|type=enum|enumValues=clockwise,counterclockwise|desc=|required=true|multiple=fals|default=clockwise
-## @param Size:title=Size|type=enum|enumValues=line height,1.5 lines,2 lines,10px,20px,25px,50px,75px,100px,200px|desc=MY DESCRIPTION|required=true|multiple=fals|default=line height
+## @param Size:title=Size|type=enum|enumValues=line height,1.5 lines,2 lines,10px,25px,50px,75px,100px,200px|desc=MY DESCRIPTION|required=true|multiple=fals|default=line height
+
+## check the user macro parameters against these list arrays
+
+#set( $ColList = ["black","grey","white","red","green","blue","yellow","cyan","magenta"] )
+#set( $FillValList = ["0","1","2","3","4"] )
+#set( $FillDirList = ["clockwise","counterclockwise"] )
+#set( $SizeList = ["line height","1.5 lines","2 lines","10px","25px","50px","75px","100px","200px"] )
+
+## process the background color parameter
 
 #if( $paramColBack == "" )
   #set( $backCol = "white" )
-#else
+#elseif( $ColList.contains($paramColBack) )
   #set( $backCol = $paramColBack )
+#else
+  #set( $backCol = "white" )
 #end
+
+## process the foreground color parameter
 
 #if( $paramColFore == "" )
   #set( $foreCol = "black" )
-#else
+#elseif( $ColList.contains($paramColFore) )
   #set( $foreCol = $paramColFore )
+#else
+  #set( $backCol = "black" )
 #end
+
+## process the size parameter
 
 #if( $paramSize == "" )
   #set( $size = "size1em" )
@@ -36,15 +53,21 @@
   #set( $size = "size3halvesem" )
 #elseif( $paramSize == "2 lines" )
   #set( $size = "size2em" )
-#else
+#elseif( $SizeList.contains($paramSize) )
   #set( $size = "size$paramSize" )
+#else
+  #set( $size = "size1em" )
 #end
 
-#if( $paramFillDir == "" )
-  #set( $fillDir = "clockwise" )
+## process the fill direction parameter
+
+#if( $FillDirList.contains($paramFillDir) )
+  #set( $fillDir = $paramFillDir )
 #else
-  #set( $fillDir = $paramFillDir  )
+  #set( $fillDir =  "clockwise" )
 #end
+
+## process the fill value parameter - here the HTML (in this case SVG) elements are gemerated
 
 #if( $paramFillValue == "0" )
 <svg class="$size"><g>
@@ -75,35 +98,36 @@
 </g></svg>
 #end
 
-<!--  <svg width="100" height="100" display="none"> -->
+## here the SVG symbols are defined that are referenced above
+
 <svg display="none"><defs>
-  <title>Komponenten für den Harvey Ball</title>
+  <title>components for the Harvey Ball</title>
   <symbol id="harvey-circle" viewBox="0 0 100 100">
-    <desc>Kreis für den Hintergrund</desc>
+    <desc>circle for the background - also use for completely filled circle</desc>
     <circle cx="50" cy="50" r="40" />
   </symbol>
   <symbol id="clockwise-1of4" viewBox="0 0 100 100">
-    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <desc>quarter circle for the foreground / fill</desc>
     <path d="M 50 50 L 50 10 A 40 40 0 0 1 90 50 L 50 50" />
   </symbol>
   <symbol id="clockwise-2of4" viewBox="0 0 100 100">
-    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <desc>half circle for the foreground / fill</desc>
     <path d="M 50 50 L 50 10 A 40 40 0 0 1 50 90 L 50 50" />
   </symbol>
   <symbol id="clockwise-3of4" viewBox="0 0 100 100">
-    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <desc>three quarters circle for the foreground / fill</desc>
     <path d="M 50 50 L 50 10 A 40 40 0 1 1 10 50 L 50 50" />
   </symbol>
   <symbol id="counterclockwise-1of4" viewBox="0 0 100 100">
-    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <desc>quarter circle for the foreground / fill</desc>
     <path d="M 50 50 L 50 10 A 40 40 0 0 0 10 50 L 50 50" />
   </symbol>
   <symbol id="counterclockwise-2of4" viewBox="0 0 100 100">
-    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <desc>half circle for the foreground / fill</desc>
     <path d="M 50 50 L 50 10 A 40 40 0 0 0 50 90 L 50 50" />
   </symbol>
   <symbol id="counterclockwise-3of4" viewBox="0 0 100 100">
-    <desc>Kreissegment 1/4 für den Vordergrund</desc>
+    <desc>three quarters circle for the foreground / fill</desc>
     <path d="M 50 50 L 50 10 A 40 40 0 1 0 90 50 L 50 50" />
   </symbol>
 </defs></svg>
